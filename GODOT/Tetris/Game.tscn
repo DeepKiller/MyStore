@@ -1,0 +1,31 @@
+[gd_scene format=2]
+
+[node name="Game" type="Node2D"]
+position = Vector2( 522.906, 301.04 )
+
+[node name="GameArea" type="Panel" parent="."]
+margin_left = -200.343
+margin_top = -300.0
+margin_right = -0.343018
+margin_bottom = 100.658
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Panel" parent="."]
+margin_left = -0.343018
+margin_top = -300.0
+margin_right = 200.0
+margin_bottom = 100.658
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Panel" parent="."]
+margin_left = -200.0
+margin_top = 100.658
+margin_right = 200.0
+margin_bottom = 300.658
+__meta__ = {
+"_edit_use_anchors_": false
+}
