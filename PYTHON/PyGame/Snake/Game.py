@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT))
 clock = pygame.time.Clock()
 running = True
 while running:
-    screen.fill((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
+    screen.fill((255,0,0))
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
