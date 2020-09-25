@@ -5,6 +5,7 @@ class Tile(pygame.sprite.Sprite):
     Size = (0,0)
     Position = (0,0)
     Color = (0,0,0)
+    NextDirection = ""
     Direction = "U" # U = UP D = Down L = Left R = Right
     def __init__(self,SizeV,SizeH,PosY,PosX,Col):
         self.Size = (SizeV,SizeH)
@@ -18,10 +19,13 @@ class Tile(pygame.sprite.Sprite):
     
     def ChangeDirection(self,NewDir):
         self.Direction = NewDir
+        self.NextDirection = NewDir
 
     def CheckLose(self,Tiles):
         return pygame.sprite.spritecollide(self, Tiles, False)          
 
+    def CheckFood(self,Food):
+        return pygame.sprite.spritecollide(self,Food,False)
 
     def update(self):
         if self.Direction == "U":
@@ -32,6 +36,7 @@ class Tile(pygame.sprite.Sprite):
             self.rect.x+=self.Size[1]
         if self.Direction == "L":
             self.rect.x-=self.Size[1]
+    
 
 class Food(pygame.sprite.Sprite):
     Size =(0,0)
@@ -41,4 +46,5 @@ class Food(pygame.sprite.Sprite):
         self.image = pygame.Surface(self.Size)
         self.image.fill((255,127,127))
         self.rect = self.image.get_rect()
-        self.rect.center = (random.randint(0+10,WIDTH-10),random.randint(0+10,HEIGTH-10))
+        i,j = (random.randint(0+50,WIDTH-50),random.randint(0+50,HEIGTH-50))
+        self.rect.center = (i-i%10,j-j%10)
