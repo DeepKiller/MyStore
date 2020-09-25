@@ -32,7 +32,6 @@ for i in Borders:
     AllSprite.add(i)
     i.Direction=""
 Food = Tile.Food(10,10,WIDTH,HEIGHT)
-CORX,CORY = (0,10)
 AllSprite.add(Food)
 AllSprite.add(Player[0])
 while running:
@@ -43,16 +42,12 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 Player[0].ChangeDirection("L")
-                CORY,CORX=(0,10)
             if event.key == pygame.K_RIGHT:
                 Player[0].ChangeDirection("R")
-                CORY,CORX=(0,-10)
             if event.key == pygame.K_UP:
                 Player[0].ChangeDirection("U")
-                CORX,CORY=(0,10)
             if event.key == pygame.K_DOWN:
                 Player[0].ChangeDirection("D")
-                CORX,CORY=(0,-10)
     if Player[0].CheckLose(Borders):
         break
     if Player[0].rect.center == Food.rect.center:
@@ -62,14 +57,13 @@ while running:
         Player[-1].Direction="F"
         AllSprite.add(Player[-1])
         AllSprite.add(Food)
-    for i in range(1,len(Player)):
-        if Player[i].NextDirection == "U":
-        Player[i].rect.x = Player[i-1].rect.x+CORX
-        Player[i].rect.y = Player[i-1].rect.y+CORY
-        if i > 2 and Player[0].rect.center == Player[i].rect.center:
-            break
     pygame.display.flip()
     AllSprite.update()
+    for i in range(1,len(Player)):
+        Player[i].rect.x = Player[i-1].NextPosition[0]
+        Player[i].rect.y = Player[i-1].NextPosition[1]
+        if i > 2 and Player[0].rect.center == Player[i].rect.center:
+            break
     screen.fill((255,255,255))
     AllSprite.draw(screen)
     clock.tick(FPS)

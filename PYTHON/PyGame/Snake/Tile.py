@@ -2,10 +2,7 @@ import pygame
 import random
 
 class Tile(pygame.sprite.Sprite):
-    Size = (0,0)
-    Position = (0,0)
-    Color = (0,0,0)
-    NextDirection = ""
+    NextPosition = (0,0)
     Direction = "U" # U = UP D = Down L = Left R = Right
     def __init__(self,SizeV,SizeH,PosY,PosX,Col):
         self.Size = (SizeV,SizeH)
@@ -19,7 +16,6 @@ class Tile(pygame.sprite.Sprite):
     
     def ChangeDirection(self,NewDir):
         self.Direction = NewDir
-        self.NextDirection = NewDir
 
     def CheckLose(self,Tiles):
         return pygame.sprite.spritecollide(self, Tiles, False)          
@@ -28,6 +24,7 @@ class Tile(pygame.sprite.Sprite):
         return pygame.sprite.spritecollide(self,Food,False)
 
     def update(self):
+        self.NextPosition = (self.rect.x,self.rect.y)
         if self.Direction == "U":
             self.rect.y-=self.Size[0]
         if self.Direction == "D":
