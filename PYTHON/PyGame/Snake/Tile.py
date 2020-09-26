@@ -15,13 +15,11 @@ class Tile(pygame.sprite.Sprite):
         self.rect.center = (self.Position)
     
     def ChangeDirection(self,NewDir):
-        self.Direction = NewDir
+        if (self.Direction == "U" and not NewDir == "D") or (self.Direction == "D" and not NewDir == "U") or (self.Direction == "R" and not NewDir == "L") or (self.Direction == "L" and not NewDir == "R"):
+            self.Direction = NewDir
 
-    def CheckLose(self,Tiles):
+    def Check(self,Tiles):
         return pygame.sprite.spritecollide(self, Tiles, False)          
-
-    def CheckFood(self,Food):
-        return pygame.sprite.spritecollide(self,Food,False)
 
     def update(self):
         self.NextPosition = (self.rect.x,self.rect.y)
@@ -37,11 +35,21 @@ class Tile(pygame.sprite.Sprite):
 
 class Food(pygame.sprite.Sprite):
     Size =(0,0)
-    def __init__(self,SizeV,SizeH,WIDTH,HEIGTH):
+    def __init__(self,SizeV,SizeH,WIDTH,HEIGTH,Player):
         self.Size = (SizeV,SizeH)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface(self.Size)
         self.image.fill((255,127,127))
         self.rect = self.image.get_rect()
-        i,j = (random.randint(0+50,WIDTH-50),random.randint(0+50,HEIGTH-50))
+        check = True
+        while True:
+            i,j = (random.randint(0+50,WIDTH-50),random.randint(0+50,HEIGTH-50))
+            for tile in Player:
+                if tile.rect.x == i and tile.rect.y ==j:
+                    check = False
+                    break
+                else:
+                    check = True
+            if check:
+                break
         self.rect.center = (i-i%10,j-j%10)
