@@ -1,0 +1,166 @@
+div.HeaderC{
+    background-color: aquamarine;
+    opacity: .85;
+    width: 100%;
+    height: 85vh;
+}
+div.Header
+{
+    background-color: aquamarine;
+    opacity: .85;
+    background-image: url("../Image/BackGround.png");
+    background-repeat: no-repeat;
+    background-position: 50% 0%;
+    background-size: 80%;
+    width: 100%;
+    height: 100vh;
+}
+div.Body{
+    background-color: whitesmoke;
+    width: 100%;
+    height: 200vh;
+}
+div.Footer{
+    background-color: whitesmoke;
+    width: 100%;
+    height: 15vh;
+    padding: 0%;
+}
+div.SideBarOpen{
+    background-color:rgba(0, 173, 116, 0.9);
+    animation-name: slidein;
+    animation-duration: 1s;
+    width: 15%;
+    height: 100vh;
+    position: fixed;
+    top: 0%;
+}
+div.SideBarClose{
+    background-color:rgba(0, 173, 116, 0.9);
+    animation-name: slideout;
+    animation-duration: 1s;
+    width: 0%;
+    height: 100vh;
+    position: fixed;
+    top: 0%;
+}
+div.SideBar{
+    background-color:rgba(0, 173, 116, 0.9);
+    width: 0%;
+    height: 100vh;
+    position: fixed;
+    top: 0%;
+}
+@keyframes slideout{
+    from{
+        width: 15%;
+    }
+    to{
+        width: 0%;
+    }
+}
+@keyframes slidein {
+    from {
+      width: 0%;
+    }
+  
+    to {
+      width: 15%;
+    }
+  }
+@keyframes slideinB{
+    from{
+        margin-left: 5px;
+    }
+    to{
+        margin-left: 13%;
+    }
+}
+@keyframes slideoutB{
+    from{
+        margin-left: 13%;
+    }
+    to{
+        margin-left: 5px;
+    }
+}
+html,body{
+    margin: 0%;
+}
+button.SideBarOpen{
+    animation-name: slideinB;
+    animation-duration: 1.1s;
+    z-index: 100;
+    position: fixed;
+    width: 0px;
+    height: 0px;
+    margin-left: 13%;
+    margin-top: 5px;
+    padding: 0%;
+    border: none;
+}
+button.SideBarClose{
+    animation-name: slideoutB;
+    animation-duration: 0.9s;
+    z-index: 100;
+    position: fixed;
+    width: 0px;
+    height: 0px;
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 0%;
+    border: none;
+}
+button.SideBar{
+    z-index: 100;
+    position: fixed;
+    width: 0px;
+    height: 0px;
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 0%;
+    border: none;
+}
+hr.Separate{
+    width : 97%;
+    size : 2;
+    margin-top: 0;
+}
+a.Hide{
+    visibility: hidden;
+}
+a.Visible{
+    margin-left: 5%;
+    text-decoration: none;
+    color: black;
+    font-family: Verdana;
+    font-size: 13;
+}
+p.Welcome{
+    margin: 0%;
+    margin-left: 25%;
+    padding-top: 10%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+p.Text{
+    padding: 1%;
+    padding-bottom: 0%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    opacity: 0.75;
+}
+p.DText{
+    padding: 2%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    opacity: 0.75;
+}
+table{
+    padding-top: 10%;
+}
+td{
+    border-style: dotted;
+    border-color: red;
+}
