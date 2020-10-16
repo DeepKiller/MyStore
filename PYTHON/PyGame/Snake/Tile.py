@@ -4,6 +4,7 @@ import random
 class Tile(pygame.sprite.Sprite):
     NextPosition = (0,0)
     Direction = "U" # U = UP D = Down L = Left R = Right
+    IsPlayer = False
     def __init__(self,SizeV,SizeH,PosY,PosX,Col):
         self.Size = (SizeV,SizeH)
         self.Position = (PosX,PosY)

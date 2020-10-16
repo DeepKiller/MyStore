@@ -1,11 +1,49 @@
 import pygame
 import random
 import Tile
+import Neuro
+
+###############################################
+#PLAYER CONTROL################################
+###############################################
+    #    if event.type == pygame.KEYDOWN:
+     #       if event.key == pygame.K_LEFT:
+      #          Player[0].ChangeDirection("L")
+       #     if event.key == pygame.K_RIGHT:
+        #        Player[0].ChangeDirection("R")
+         #   if event.key == pygame.K_UP:
+          #      Player[0].ChangeDirection("U")
+           # if event.key == pygame.K_DOWN:
+            #    Player[0].ChangeDirection("D")
+###############################################
 
 WIDTH = 500
 HEIGHT = 500
-FPS = 2
+FPS = 30
 
+
+def GetGame(PLAYER,BORDER,FOOD):
+    ALL = list()
+    ALL.extend(BORDER)
+    for i in PLAYER:
+        i.IsPlayer = True
+    ALL.extend(PLAYER)
+    ALL.append(FOOD)
+    i = 0
+    GAME= list()
+    while i < HEIGHT:
+        row = list()
+        j = 0
+        while j < WIDTH:
+            for k in ALL:
+                if k.rect.center == (i,j):
+                    row.append(k)
+                    break
+            j+=10
+        if row:
+            GAME.append(row)
+        i+=10
+    return GAME
 
 pygame.init()
 pygame.mixer.init()
@@ -17,16 +55,22 @@ AllSprite = pygame.sprite.Group()
 Player = list()
 Player.append(Tile.Tile(10,10,WIDTH/2,HEIGHT/2,(0,255,0)))
 Borders = list()
-#Borders.append(Player)
 i=0
-while i <= HEIGHT:
-    Borders.append(Tile.Tile(10,10,i,5,(0,0,0)))
-    Borders.append(Tile.Tile(10,10,i,WIDTH-5,(0,0,0)))
+BLACK,RED = (0,0,0),(255,0,0)
+while i < HEIGHT:
+    Borders.append(Tile.Tile(10,10,i,0,BLACK))
+    Borders.append(Tile.Tile(10,10,i,WIDTH,RED))
+    b = BLACK
+    BLACK = RED
+    RED = b
     i+=10
 i=0
-while i<= WIDTH:
-    Borders.append(Tile.Tile(10,10,5,i,(0,0,0)))
-    Borders.append(Tile.Tile(10,10,WIDTH-5,i,(0,0,0)))
+while i< WIDTH:
+    Borders.append(Tile.Tile(10,10,0,i,BLACK))
+    Borders.append(Tile.Tile(10,10,WIDTH,i,RED))
+    b = BLACK
+    BLACK = RED
+    RED = b
     i+=10
 for i in Borders:
     AllSprite.add(i)
@@ -39,15 +83,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                Player[0].ChangeDirection("L")
-            if event.key == pygame.K_RIGHT:
-                Player[0].ChangeDirection("R")
-            if event.key == pygame.K_UP:
-                Player[0].ChangeDirection("U")
-            if event.key == pygame.K_DOWN:
-                Player[0].ChangeDirection("D")
+    Neuro.CallBack(GetGame(Player,Borders,Food));
     if Player[0].Check(Borders):
         break
     if Player[0].Check(Player[1:len(Player)]):
@@ -67,4 +103,3 @@ while running:
     screen.fill((255,255,255))
     AllSprite.draw(screen)
     clock.tick(FPS)
-pygame.quit()
