@@ -31,12 +31,12 @@ def GetGame(PLAYER,BORDER,FOOD):
     ALL.append(FOOD)
     i = 0
     GAME= list()
-    while i < HEIGHT:
+    while i <= HEIGHT:
         row = list()
         j = 0
-        while j < WIDTH:
+        while j <= WIDTH:
             for k in ALL:
-                if k.rect.center == (i,j):
+                if k.rect.center == (j,i):
                     row.append(k)
                     break
             j+=10
@@ -75,6 +75,7 @@ while i< WIDTH:
 for i in Borders:
     AllSprite.add(i)
     i.Direction=""
+Player[0].Direction=""
 Food = Tile.Food(10,10,WIDTH,HEIGHT,Player)
 AllSprite.add(Food)
 AllSprite.add(Player[0])

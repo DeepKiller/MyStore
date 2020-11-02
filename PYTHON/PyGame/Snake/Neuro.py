@@ -16,10 +16,19 @@ class TILES(Enum):
     PLAYER = 3
 
 def Spacer(row,POS):
-    for i in range(len(row)-1):
-        for j in range(int((POS[i+1].rect.x-POS[i].rect.x)/10)-1):
-            row.insert(i+1,TILES.SPACE)
-    print(len(row))
+    size = len(row)
+    counter = 0
+    for i in range(size-1):
+        spaces = int(abs((POS[i+1].rect.x-POS[i].rect.x)//10-size))
+        while spaces>0:
+            row.insert(counter+1,TILES.SPACE)
+            spaces-=1
+            counter+=1
+        size =0
+        counter+=1
+
+def NeuroMind():
+    pass
 
 def CallBack(_GAME):
     exit = list()
@@ -37,3 +46,4 @@ def CallBack(_GAME):
             Spacer(r,row)
         exit.append(r)
     GAME=exit
+    return NeuroMind()
