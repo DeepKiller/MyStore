@@ -60,22 +60,18 @@ BLACK,RED = (0,0,0),(255,0,0)
 while i < HEIGHT:
     Borders.append(Tile.Tile(10,10,i,0,BLACK))
     Borders.append(Tile.Tile(10,10,i,WIDTH,RED))
-    b = BLACK
-    BLACK = RED
-    RED = b
+    BLACK,RED = RED,BLACK
     i+=10
 i=0
-while i< WIDTH:
+while i< WIDTH+10:
     Borders.append(Tile.Tile(10,10,0,i,BLACK))
-    Borders.append(Tile.Tile(10,10,WIDTH,i,RED))
-    b = BLACK
-    BLACK = RED
-    RED = b
+    Borders.append(Tile.Tile(10,10,HEIGHT,i,RED))
+    BLACK,RED = RED,BLACK
     i+=10
 for i in Borders:
     AllSprite.add(i)
     i.Direction=""
-Player[0].Direction=""
+Player[0].Direction=""#######################################################################################################
 Food = Tile.Food(10,10,WIDTH,HEIGHT,Player)
 AllSprite.add(Food)
 AllSprite.add(Player[0])

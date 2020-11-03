@@ -28,7 +28,7 @@ def Spacer(row,POS):
         counter+=1
 
 def NeuroMind():
-    pass
+
 
 def CallBack(_GAME):
     exit = list()
