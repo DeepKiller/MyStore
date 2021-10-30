@@ -16,7 +16,7 @@ class Tile(pygame.sprite.Sprite):
         self.rect.center = (self.Position)
     
     def ChangeDirection(self,NewDir):
-        if (self.Direction == "U" and not NewDir == "D") or (self.Direction == "D" and not NewDir == "U") or (self.Direction == "R" and not NewDir == "L") or (self.Direction == "L" and not NewDir == "R"):
+        if (self.Direction == "U" and not NewDir == "D") or (self.Direction == "D" and not NewDir == "U") or (self.Direction == "R" and not NewDir == "L") or (self.Direction == "L" and not NewDir == "R") or (NewDir == "P") or (self.Direction == "P"):
             self.Direction = NewDir
 
     def Check(self,Tiles):

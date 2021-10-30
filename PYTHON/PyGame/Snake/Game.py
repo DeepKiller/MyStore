@@ -1,7 +1,7 @@
 import pygame
 import random
 import Tile
-import Neuro
+#import Neuro
 
 ###############################################
 #PLAYER CONTROL################################
@@ -19,7 +19,7 @@ import Neuro
 
 WIDTH = 500
 HEIGHT = 500
-FPS = 30
+FPS = 10
 
 
 def GetGame(PLAYER,BORDER,FOOD):
@@ -71,7 +71,7 @@ while i< WIDTH+10:
 for i in Borders:
     AllSprite.add(i)
     i.Direction=""
-Player[0].Direction=""#######################################################################################################
+Player[0].Direction="P"#######################################################################################################
 Food = Tile.Food(10,10,WIDTH,HEIGHT,Player)
 AllSprite.add(Food)
 AllSprite.add(Player[0])
@@ -80,7 +80,18 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    Neuro.CallBack(GetGame(Player,Borders,Food));
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+               Player[0].ChangeDirection("L")
+            if event.key == pygame.K_RIGHT:
+                Player[0].ChangeDirection("R")
+            if event.key == pygame.K_UP:
+                Player[0].ChangeDirection("U")
+            if event.key == pygame.K_DOWN:
+                Player[0].ChangeDirection("D")
+            if event.key == pygame.K_p:
+                Player[0].ChangeDirection("P")
+#    Neuro.CallBack(GetGame(Player,Borders,Food));
     if Player[0].Check(Borders):
         break
     if Player[0].Check(Player[1:len(Player)]):
@@ -89,14 +100,15 @@ while running:
         AllSprite.remove(Food)
         Food = Tile.Food(10,10,WIDTH,HEIGHT,Player)
         Player.append(Tile.Tile(10,10,Player[-1].rect.y,Player[-1].rect.x,(0,255,0)))
-        Player[-1].Direction="F"
+        Player[-1].Direction="P"
         AllSprite.add(Player[-1])
         AllSprite.add(Food)
     pygame.display.flip()
     AllSprite.update()
-    for i in range(1,len(Player)):
-        Player[i].rect.x = Player[i-1].NextPosition[0]
-        Player[i].rect.y = Player[i-1].NextPosition[1]
+    if(Player[0].Direction != "P"):
+        for i in range(1,len(Player)):
+            Player[i].rect.x = Player[i-1].NextPosition[0]
+            Player[i].rect.y = Player[i-1].NextPosition[1]
     screen.fill((255,255,255))
     AllSprite.draw(screen)
     clock.tick(FPS)
