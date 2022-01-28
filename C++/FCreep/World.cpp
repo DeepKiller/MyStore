@@ -9,10 +9,11 @@ class World
 public:
     int **WorldArray;
     int Size;
-    int MaxValue = 100;
+    int MaxValue = 500;
 
     World(int size)
     {
+        srand(time(0));
         WorldArray = new int *[size];
 
         for (int x = 0; x < size; x++)
