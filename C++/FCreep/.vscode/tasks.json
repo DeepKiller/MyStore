@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Сборка из скрипта",
+			"command": "./compile.sh",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Авто компиляция с помощью скрипта",
+			"problemMatcher": []
+		}
+	]
+}
