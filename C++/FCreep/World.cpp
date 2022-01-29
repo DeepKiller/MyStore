@@ -9,11 +9,11 @@ class World
 public:
     int **WorldArray;
     int Size;
-    int MaxValue = 500;
+    const int MaxValue = 30;
 
-    World(int size)
+    World(int size, unsigned int seed)
     {
-        srand(time(0));
+        srand(seed);
         WorldArray = new int *[size];
 
         for (int x = 0; x < size; x++)
@@ -22,7 +22,7 @@ public:
 
             for (int y = 0; y < size; y++)
             {
-                WorldArray[x][y] = (rand() % (MaxValue * 2) + 1) - MaxValue;
+                WorldArray[x][y] = (rand() % (MaxValue * 2 + 1)) - MaxValue;
             }
         }
         Size = size;
@@ -51,6 +51,6 @@ private:
         {
             sum += arr[i];
         }
-        return sum / size;
+        return sum / size + rand() % MaxValue/10;
     }
 };

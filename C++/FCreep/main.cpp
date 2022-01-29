@@ -3,6 +3,6 @@
 
 int main()
 {
-    World world = World((TileOnScreen + TileSize) * 2);
+    World world = World((TileOnScreen + TileSize) * 2, time(0));
     Draw(&world);
 }

@@ -9,7 +9,7 @@ ContextSettings settings(0, 0, 4, 1, 1, 0, false);
 
 int TileSize = 10;
 int TileOnScreen = 100;
-const int CountSlice = 20;
+const int CountSlice = 30;
 
 RenderWindow Wind(VideoMode(TileSize *TileOnScreen, TileSize *TileOnScreen), "FCreeps", Style::Default, settings);
 
@@ -53,9 +53,9 @@ void GenerateShape(World *w, RenderWindow *wnd, int posx, int posy, bool **layer
                 int coordy = yi - posy;
                 RectangleShape rect(Vector2f(TileSize, TileSize));
                 rect.setPosition(Vector2f(coordx, coordy));
-                int r = index * 255 / CountSlice;
-                int b = 255 - r;
-                rect.setFillColor(Color(r, abs(r - b), b, 255));
+                int blue = index * 255 / CountSlice * 2;
+                int green = blue < 255 ? 0 : (CountSlice - index) * 255 / CountSlice * 2;
+                rect.setFillColor(Color(0, green, blue, 255));
                 wnd->draw(rect);
             }
         }
@@ -78,47 +78,59 @@ void Draw(World *world)
             {
                 Wind.close();
             }
-            else if (event.type == Event::KeyPressed) //Keyboard Events
+            else if (event.type == Event::KeyPressed || event.type == Event::MouseButtonPressed) //Keyboard Events
             {
                 if (Keyboard::isKeyPressed(Keyboard::Left))
                 {
                     point.x -= point.x - TileSize > 0 ? TileSize : 0;
                 }
-                else if (Keyboard::isKeyPressed(Keyboard::Right))
+                if (Keyboard::isKeyPressed(Keyboard::Right))
                 {
                     point.x += point.x + TileSize < (world->Size - TileOnScreen) * TileSize ? TileSize : 0;
                 }
-                else if (Keyboard::isKeyPressed(Keyboard::Up))
+                if (Keyboard::isKeyPressed(Keyboard::Up))
                 {
                     point.y -= point.y - TileSize > 0 ? TileSize : 0;
                 }
-                else if (Keyboard::isKeyPressed(Keyboard::Down))
+                if (Keyboard::isKeyPressed(Keyboard::Down))
                 {
                     point.y += point.y + TileSize < (world->Size - TileOnScreen) * TileSize ? TileSize : 0;
                 }
-                else if (Keyboard::isKeyPressed(Keyboard::Space))
+                if (Keyboard::isKeyPressed(Keyboard::Space))
                 {
                     world->Smooth();
                 }
-                else if (Keyboard::isKeyPressed(Keyboard::Escape))
+                if (Keyboard::isKeyPressed(Keyboard::Escape))
                 {
                     Wind.close();
                 }
-                else if (Keyboard::isKeyPressed(Keyboard::Add))
+                if (Keyboard::isKeyPressed(Keyboard::Add))
                 {
                     if (TileSize < 100)
                     {
-                        TileSize++;
+                        TileSize += TileSize;
                     }
                 }
                 else if (Keyboard::isKeyPressed(Keyboard::Subtract))
                 {
                     if (TileSize > 1)
                     {
-                        TileSize--;
+                        TileSize -= TileSize;
                     }
                 }
-                TileOnScreen = Wind.getSize().x / TileSize;
+                if (Mouse::isButtonPressed(Mouse::Left))
+                {
+
+                    int coordx = Mouse::getPosition().x - Wind.getPosition().x;
+                    int coordy = Mouse::getPosition().y - Wind.getPosition().y;
+                    cout << coordx << " " << coordy << endl;
+
+                    int xi = coordx / TileSize + 1 + point.x;
+                    int yi = coordy / TileSize + 1 + point.y;
+
+                    cout << world->WorldArray[xi][yi] << endl;
+                }
+                TileOnScreen = min(Wind.getSize().x / TileSize, Wind.getSize().y / TileSize);
                 changed = true;
             }
         }
